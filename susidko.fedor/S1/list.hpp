@@ -12,8 +12,8 @@ namespace susidko
   class List
   {
     public:
-    class Iterator;
-    class ConstIterator;
+      class Iterator;
+      class ConstIterator;
 
       List():
         first_(nullptr),
@@ -26,6 +26,7 @@ namespace susidko
       List(std::initializer_list< T > list);
       List(Iterator first, Iterator last);
       List(ConstIterator first, ConstIterator last);
+      ~List();
       List(List< T > & p);
       List(List< T > && moved) noexcept;
 
@@ -686,12 +687,12 @@ namespace susidko
   template< typename T >
   T List< T >::front()
   {
-    return first_.data;
+    return first_->data;
   }
   template< typename T >
   T List< T >::back()
   {
-    return last_.data;
+    return last_->data;
   }
   template< typename T >
   T List< T >::getValue(size_t index)

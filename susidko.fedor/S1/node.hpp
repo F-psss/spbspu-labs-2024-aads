@@ -6,7 +6,7 @@ namespace susidko
   template< typename T >
   struct Node
   {
-    Node(T data_):
+    Node(T data_) explicit:
       data(data_),
       next(nullptr),
       prev(nullptr)
