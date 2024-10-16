@@ -36,7 +36,7 @@ T susidko::Stack< T >::pop()
 {
   if (isEmpty())
   {
-    throw std::logic_error("wdwdwdwd");
+    throw std::logic_error("pop stack не работает, оно пусто");
   }
   T temp = body_.back();
   body_.popBack();

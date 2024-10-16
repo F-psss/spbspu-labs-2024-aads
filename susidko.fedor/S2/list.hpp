@@ -324,14 +324,8 @@ namespace susidko
     last_ = nullptr;
     Iterator val_iter_;
     size_ = 0;
-    //std::cout << "cop";
-    if (p.size_)
-    {
-      std::cout << "N";
-    }
     for (size_t i = 0; i < p.size_; i++)
     {
-      std::cout << "copL" << std::endl;
       T temp = p.getValue(i);
       pushBack(temp);
     }
@@ -339,7 +333,6 @@ namespace susidko
   template< typename T >
   List< T >::List(List< T > && moved) noexcept
   {
-    std::cout << "N";
     first_ = moved.first_;
     last_ = moved.last_;
     val_iter_ = moved.val_iter_;
@@ -351,7 +344,6 @@ namespace susidko
   template< typename T >
   List< T > & List< T >::operator=(List< T > & p)
   {
-    std::cout << "N";
     first_ = nullptr;
     last_ = nullptr;
     Iterator val_iter_;
@@ -366,7 +358,6 @@ namespace susidko
   template< typename T >
   List< T > & List< T >::operator=(List< T > && moved)
   {
-    std::cout << "N";
     first_ = moved.first_;
     last_ = moved.last_;
     val_iter_ = moved.val_iter_;

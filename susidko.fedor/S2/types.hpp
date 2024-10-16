@@ -3,6 +3,7 @@
 
 #include "queue.hpp"
 #include "stack.hpp"
+#include <algorithm>
 
 namespace susidko
 {
@@ -118,6 +119,7 @@ namespace susidko
       {}
       bool isEmpty();
       void print();
+      long long countPostfix();
     private:
       Queue< Elem > body_;
   };
@@ -211,13 +213,11 @@ susidko::Postfix susidko::Infix::infToPost()
   susidko::Infix inf(body_);
   susidko::Queue< susidko::Elem > res;
   susidko::Stack< Elem > stack;
-  std::cout << "start";
   while (not inf.isEmpty())
   {
     susidko::Elem i = inf.body_.pop();
     if (i.getType() == 'n')
     {
-      std::cout << "n" << std::endl;
       res.push(i);
     }
     else if (i.getType() == 't')
@@ -229,11 +229,9 @@ susidko::Postfix susidko::Infix::infToPost()
         stack.pop();
       }
       stack.push(i);
-      std::cout << "t" << std::endl;
     }
     else if (i.getType() == 'b')
     {
-      std::cout << "b" << std::endl;
       if (i.get() == "(")
       {
         stack.push(i);
@@ -256,9 +254,61 @@ susidko::Postfix susidko::Infix::infToPost()
     res.push(temp);
     stack.pop();
   }
-//res.print();
-susidko::Postfix ress = susidko::Postfix(res);
-return ress;
+  susidko::Postfix ress(res);
+  return ress;
 }
+long long susidko::Postfix::countPostfix()
+{
+  Stack< long long > stack;
+  while (!isEmpty())
+  {
+    susidko::Elem temp = body_.pop();
+    if (temp.type_ == 'n')
+    {
+      long long tt = temp.operand_.getValue();
+      stack.push(tt);
+    }
+    else
+    {
+      long long second = stack.pop();
+      long long first = stack.pop();
 
+      switch (temp.operator_.getValue())
+      {
+        case '+':
+        {
+          long long tt = first + second;
+          stack.push(tt);
+          break;
+        }
+        case '-':
+        {
+          long long tt = first - second;
+          stack.push(tt);
+          break;
+        }
+        case '/':
+        {
+          long long tt = first / second;
+          stack.push(tt);
+          break;
+        }
+        case '*':
+        {
+          long long tt = first * second;
+          stack.push(tt);
+          break;
+        }
+        case '%':
+        {
+          long long tt = first % second;
+          stack.push(tt);
+          break;
+        }
+      }
+    }
+  }
+
+  return stack.top();
+}
 #endif

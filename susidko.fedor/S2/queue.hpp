@@ -35,7 +35,7 @@ T susidko::Queue< T >::pop()
 {
   if (isEmpty())
   {
-    throw std::logic_error("wdwdwdwd");
+    throw std::logic_error("pop не работает, оно пусто");
   }
   T temp = body_.front();
   body_.popFront();
@@ -60,7 +60,6 @@ template< typename T >
 susidko::Queue< T >::Queue(susidko::Queue< T > & p):
   body_(p.body_)
 {
-  std::cout << "copQ" << std::endl;
 }
 template < typename T >
 susidko::Queue< T >::Queue(Queue && other):

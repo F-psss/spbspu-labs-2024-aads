@@ -10,8 +10,7 @@
 
 int main(int argc, char *argv[])
 {
-  susidko::Stack< susidko::Elem > stack;
-  susidko::Queue< long long > queue;
+  susidko::Stack< std::string > stack;
   if (argc == 1)
   {
     susidko::fillStack(std::cin, stack);
@@ -24,7 +23,7 @@ int main(int argc, char *argv[])
   else
   {
     std::cerr << "Empty input\n";
-    return 1;
+    return 11;
   }
   long long sz = stack.size();
   if (sz == 0)
@@ -32,19 +31,20 @@ int main(int argc, char *argv[])
     std::cout << "\n";
     return 0;
   }
-  /*for (long long i = 0; i < sz; i++)
+  for (long long i = 0; i < sz; i++)
   {
     try
     {
       long long size = 0;
-      std::shared_ptr< std::string[] > ptr(sobolevsky::fromInfixToPostfix(stack.top(), size));
+      susidko::Infix tet = susidko::createInfix(stack.top());
+      susidko::Postfix posss = tet.infToPost();
       if (i < (sz - 1))
       {
-        std::cout << sobolevsky::countPostfix(ptr, size) << " ";
+        std::cout << posss.countPostfix() << " ";
       }
       else
       {
-        std::cout << sobolevsky::countPostfix(ptr, size) << "\n";
+        std::cout << posss.countPostfix() << "\n";
       }
       stack.pop();
     }
@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
   }
 
   return 0;
-	susidko::Operand bb(2);
+	/*susidko::Operand bb(2);
 	susidko::Operand cc(3);
 	susidko::Operand aa(1);
 	susidko::Operator minus('-');
